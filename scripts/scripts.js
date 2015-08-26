@@ -1,5 +1,11 @@
 // $(function(){
 
+//necessary variables
+var new_order = [];
+var new_order_button = $("#new-order-button");
+var kitchen_fire_button = $("#kitchen-fire-button");
+var menu_library = [];
+
 //arrays and objects
 salads_array = [ "Salad",
   {item: "The Gates of Eden", price:10, has_meat:[false, ""], vegan: false, gluten_free: true},
@@ -66,30 +72,34 @@ function menu_builder() {
   })
 }
 
-var menu_library = [];
+function order_handlers() {
+    new_order_button.on('click', function() {
+      new_order_button.remove();
+      this_order = new_order;
 
-//necessary variables
-var new_order = {}
-var new_order_button = $("#new-order-button");
-var kitchen_fire_button = $("#kitchen-fire-button")
-var menu_item = $("li.menu-item")
+      $("#order-container").append("<div class=customer-order></div>")
 
-menu_item.on('click', function() {
+      // these need to be checkboxes
+      // patron_count = prompt("How many patrons are at the table?");
+      // vegan_flag = prompt("Any vegetarians?");
+      // vegetarian_flag = prompt("Vegans?");
+      // celiac_flag = prompt("Celiac/gluten-free folks?");
+
+      return this_order;
+    })
+
+  $(".menu-item").on('click', function(element) {
+    ordered_item = $("<li>"+element+"</li>")
+    // this_order.push()
+    $("div.customer-order").append(ordered_item) //????
+  })
+
+}
+
+menu_builder();
+order_handlers();
   //this.attr("class", "ordered-item");
-  console.log("fired")
-})
 
-new_order_button.on('click', function() {
-  new_order_button.remove();
-  this_order = new_order;
-
-  return this_order;
-  // these need to be checkboxes
-  // patron_count = prompt("How many patrons are at the table?");
-  // vegan_flag = prompt("Any vegetarians?");
-  // vegetarian_flag = prompt("Vegans?");
-  // celiac_flag = prompt("Celiac/gluten-free folks?");
-  });
 
 
 
