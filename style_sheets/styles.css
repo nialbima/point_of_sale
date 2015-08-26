@@ -1,0 +1,62 @@
+#body-container {
+  width: 100%;
+  border: 1px solid black;
+  margin: 0 auto;
+  height: 500px;
+  background-color: red;
+  padding: 20px 0 0 0;
+}
+
+#header-container {
+  background-color: yellow;
+  border: 1px solid black;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 100%;
+}
+
+
+#menu-container {
+  float: left;
+  margin: 0 auto;
+  width: 33%;
+  background-color: green;
+  height: 90%;
+}
+
+#order-container {
+  float: left;
+  margin: 0 auto;
+  width: 34%;
+  background-color: blue;
+  height: 90%;
+}
+
+#bill-container {
+  float:left;
+  margin: 0 auto;
+  width: 33%;
+  background-color: gray;
+  height: 90%;
+}
+
+#server-toggle {
+  text-align: left;
+  margin: 0 auto;
+  width: 34%;
+  border: 1px solid black;
+}
+
+#tip-calculator {
+  width: 20%;
+  border: 1px solid black;
+  float: right;
+}
+
+
+
+.container-label {
+  text-align:center;
+
+}

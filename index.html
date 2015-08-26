@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <script src="scripts/scripts.js"></script>
+  <!-- get actual file from jquery -->
+  <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+  <link rel="stylesheet" href="style_sheets/styles.css"></link>
+
+</head>
+
+<body>
+
+    <div id="header-container">
+      <h1 id="header">
+        <div> HEADER </div>
+      </h1>
+
+      <div id="tip-calculator">
+        <div>Today's Tips</div>
+        <!-- calculates your tips (stretch) -->
+      </div>
+
+      <div id="server-toggle">
+        <div>Select Server <button ><!--servers working--></button></div>
+        <!-- same line, displays server orders by table-->
+      </div>
+
+    </div>
+
+  <div id="body-container">
+
+      <div id="menu-container">
+        <p class="container-label"> Menu</p>
+        <!-- has a ul for each category -->
+        <!-- each ul has all items from object -->
+      </div>
+
+      <div id="order-container">
+        <p class="container-label">Current Order</p>
+        <!-- adds item from menu on click, allows duplicates -->
+        <!-- ul lists things by category -->
+        <!-- lets you print ticket for kitchen (stretch) -->
+      </div>
+
+      <div id="bill-container">
+        <p class="container-label">Bill Total</p>
+        <!-- mirrors center div, but includes price and calculates total -->
+        <!-- lets you print your bill -->
+      </div>
+
+  </div>
+
+</body>
+</html>
