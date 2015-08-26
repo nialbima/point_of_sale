@@ -3,11 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8"/>
-  <script src="scripts/scripts.js"></script>
-  <!-- get actual file from jquery -->
-  <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
   <link rel="stylesheet" href="style_sheets/styles.css"></link>
-
 </head>
 
 <body>
@@ -32,13 +28,15 @@
   <div id="body-container">
 
       <div id="menu-container">
+        <button id="new_order_button" class=".button"/>Begin New Order</button>
         <p class="container-label"> Menu</p>
         <!-- has a ul for each category -->
         <!-- each ul has all items from object -->
       </div>
 
       <div id="order-container">
-        <p class="container-label">Current Order</p>
+        <div class="container-label">Current Order</div>
+
         <!-- adds item from menu on click, allows duplicates -->
         <!-- ul lists things by category -->
         <!-- lets you print ticket for kitchen (stretch) -->
@@ -53,4 +51,8 @@
   </div>
 
 </body>
+
+<script src="scripts/jquery-2.1.4.min.js"></script>
+<script src="scripts/scripts.js"></script>
+
 </html>
