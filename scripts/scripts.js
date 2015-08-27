@@ -2,13 +2,7 @@
 
   //necessary variables
   var new_order = [];
-
-  // this will look like: current_orders=[
-  //  [{retrieval_object}, {order array}]
-  //]
   var current_orders = [];
-  var order_number = 0 //used to track orders
-
 
   var new_order_button = $("#new-order-button"); //begins new order
   var kitchen_fire_button = $("#fire-button"); //adds to  bill`
@@ -23,41 +17,41 @@
 
   //arrays and objects
   salads_array = [ "Salad",
-    {item: "The Gates of Eden", price:10, has_meat:[false, ""], vegan: false, gluten_free: true},
-    {item: "The Cheek Corea", price:8, has_meat:[true, "pork"], vegan: false, gluten_free: false}
+    {item: "The Gates of Eden", price:10},
+    {item: "The Cheek Corea", price:8}
   ];
 
   soups_array = [ "Soup",
-    {item: "Gazpacho", price:8, has_meat:[false, ""], vegan: true, gluten_free: true},
-    {item: "Watermelon Soup", price:8, has_meat:[false, ""], vegan: true, gluten_free: true}
+    {item: "Gazpacho", price:8},
+    {item: "Watermelon Soup", price:8}
   ];
 
   pizza_array = [ "Pizza",
-    {item: "Brian DeParma", price:13, has_meat:[false, ""], vegan: false, gluten_free: false},
-    {item: "Arugula Shmoogula", price:14, has_meat:[false, ""], vegan: false, gluten_free: false},
-    {item: "Greenpointer", price: 15, has_meat: [false, ""], vegan: false, gluten_free: false},
-    {item: "Monte Cristo", price:15, has_meat:[true, "pork"], vegan: false, gluten_free: false},
-    {item: "Hellboy", price:17, has_meat:[true, "pork"], vegan: false, gluten_free: false},
-    {item: "Hometown Brisket", price:17, has_meat:[true, "beef"], vegan: false, gluten_free: false},
-    {item: "Cherry Jones", price:18, has_meat:[true, "pork"], vegan: false, gluten_free: false},
-    {item: "Grapeful Dead", price:17, has_meat:[false, ""], vegan: false, gluten_free: false},
-    {item: "Jackie Green", price:16, has_meat:[false, ""], vegan: true, gluten_free: false},
-    {item: "In Ricotta Da Vegan", price:18, has_meat:[false, ""], vegan: true, gluten_free: false}
+    {item: "Brian DeParma", price:13},
+    {item: "Arugula Shmoogula", price:14},
+    {item: "Greenpointer", price: 15},
+    {item: "Monte Cristo", price:15},
+    {item: "Hellboy", price:17},
+    {item: "Hometown Brisket", price:17},
+    {item: "Cherry Jones", price:18},
+    {item: "Grapeful Dead", price:17},
+    {item: "Jackie Green", price:16},
+    {item: "In Ricotta Da Vegan", price:18}
   ];
 
   dessert_array = [ "Dessert",
-    {item: "Apple Cider Caramel Dessert Pizza", price: 12, has_meat:[false, ""], vegan: false, gluten_free: false},
-    {item: "Vegan Pistachio Ice Cream", price:6, has_meat:[false, ""], vegan: true, gluten_free: true},
-    {item: "Hot Honey Sunday", price: 8, has_meat:[false, ""], vegan: false, gluten_free: true},
-    {item: "Candied Orange Dessert Pizza", price:13, has_meat:[false, ""], vegan: false, gluten_free: false}
+    {item: "Apple Cider Caramel Dessert Pizza", price: 12},
+    {item: "Vegan Pistachio Ice Cream", price:6 },
+    {item: "Hot Honey Sunday", price: 8},
+    {item: "Candied Orange Dessert Pizza", price:13}
   ];
 
   drinks_array = [ "Drinks",
-    {item: "Coffee", price: 3, has_meat:[false, ""], vegan: true, gluten_free: true},
-    {item: "Tea", price: 2, has_meat:[false, ""], vegan: true, gluten_free: true},
-    {item: "Soda", price: 3, has_meat:[false, ""], vegan: true, gluten_free: true},
-    {item: "Beer", price:6, has_meat:[false, ""], vegan: true, gluten_free: false},
-    {item: "Wine", price:8, has_meat:[false, ""], vegan: false, gluten_free: true}
+    {item: "Coffee", price: 3 },
+    {item: "Tea", price: 2 },
+    {item: "Soda", price: 3 },
+    {item: "Beer", price: 6 },
+    {item: "Wine", price:8 }
   ];
 
   function menu_maker(array) {
@@ -81,20 +75,17 @@
       menu_header.append(section_header)
 
         for(j = 1; j < element.length; j++) {
-          menu_item = "<li class=menu-item>"+element[j].item+"</li>";
+          menu_item = "<li> <div class=menu-item>"+element[j].item+"</div>"+element[j].price+"</li>";
           $(".food-category").last().append(menu_item)
         }
     })
   }
 
-  function set_retrieval_data() {
+  // Make stored orders retrievalable
+  function set_retrieval_data(index, server) {
     retrieval_object = {}
-
-    // order_uid = order_number;
-    order_server = servers[3].name //will get hooked into a server toggle later
-
-    retrieval_object["ID"] = order_number;
-    retrieval_object["server"] = order_server
+    retrieval_object["id"] = index;
+    retrieval_object["server"] = server;
 
     return retrieval_object
   }
@@ -104,61 +95,69 @@
     new_order_button.on('click', function() {
       new_order_button.remove();
       this_order = new_order;
-      set_retrieval_data()
 
-      $("#current-order").append("<ul id=customer-order></ul>")
-
-      // these need to be checkboxes
-      // patron_count = prompt("How many patrons are at the table?");
-      // vegan_flag = prompt("Any vegetarians?");
-      // vegetarian_flag = prompt("Vegans?");
-      // celiac_flag = prompt("Celiac/gluten-free folks?");
+      $("#current-order").append("<ul id='customer-order'></ul>")
 
       return this_order;
-      return retrieval_object;
     })
   }
 
   function add_menu_item() {
     $(".menu-item").on('click', function(element) {
-      //console.log(String.fromCharCode(event.which).text())
       ordered_item = $("<li class=ordered-item></li>")
-      //fuuuuuuckk. okay this adds the li. that's good.
-      // this_order.push()
       ordered_item.text($(element.target).text())
       $("#customer-order").append(ordered_item)
     })
   }
 
 
+  // Stores an order
+   $("#fire-button").on('click', function(event) {
+     current_orders.push([]);
+     last_index = current_orders.length - 1
+     set_retrieval_data(last_index, "Nick")
+     current_orders[last_index].push(retrieval_object)
 
-  function fire_button() {
+     $("li.ordered-item").each(function() {
+       menu_library.forEach(function(element) {
+         element.forEach(function(food) {
+           ordered_food_item = $(".ordered-item").last();
 
-     $("#fire-button").on('click', function(event){
-       //get ordered elements
-       //on click, push ordered items to a storage array (current orders)
-       //add event handler to "begin new order", storing order# and server# in a new array
-       //so we need a global variable for Order Number, and it needs to ONLY fire when we begin a new order
-       current_orders.push([]);
-       console.log('order[0]', current_orders[0]);
-       console.log('order[order_number]', current_orders[order_number]);
-       current_orders[order_number].push(retrieval_object)
+           if (ordered_food_item.text() === food.item) {
+            current_orders[last_index].push(food);
+            ordered_food_item.remove();
 
-       current_orders[order_number].push($(".ordered-item"))
-       console.log(current_orders)
-       order_number += 1;
+        }});
+      });
     });
 
+    //adds recall ability
+    $("#order-toggle").append("<div class=recall-order> Order #"+current_orders[last_index][0]['id']+" </div")
+    $(".recall-order").on("click", function(element) {
+      $(".ordered-item").remove();
+      console.log('fired');
 
-  }
+      index = $(element.target).index();
 
+      //COULD BE A FILTER
+       for (i = 1; i<current_orders[index].length; i++) {
+            
+            ordered_item = $("<li class=ordered-item></li>");
+            ordered_item.text(current_orders[index][i].item);
+            $("#customer-order").append(ordered_item);
+       }
+
+
+
+    });
+  });
+
+  //retrieve order
 
 
   function order_handlers() {
-      //make this its own function
       begin_new_order();
       add_menu_item();
-      fire_button();
   }
 
   menu_builder();
