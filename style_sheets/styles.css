@@ -8,17 +8,47 @@
   font-size: 18px;
 }
 
+#page-header {
+  width:20%;
+  float: left;
+}
+
+/*header*/
 #header-container {
   background-color: blue;
   border: 1px solid black;
-  text-align: center;
-  margin: 0 auto;
+  /*text-align: center;
+  margin: 0 auto;*/
   height: 100px;
   width: 100%;
 }
 
-#fire-button {
+#calculator-container {
+  width: 35%;
+  border: 1px solid black;
+  float:right;
+  height: 100%;
+}
 
+#order-toggle {
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: gray;
+  width: 100%;
+  border: 1px solid black;
+}
+
+#order-toggle div {
+  display: inline-block;
+  max-width: 20%;
+  max-height: 10%;
+  vertical-align: middle;
+  border: 1px solid black;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#fire-button {
 }
 
 #menu-container {
@@ -46,32 +76,35 @@
   height: 90%;
 }
 
-#order-toggle {
-  overflow: hidden;
-  white-space: nowrap;
+
+
+/*to make nice table values, and keep it all separate*/
+.item-column-cell {
+  border:1px solid black;
+  margin: 10px
   text-align: left;
-  width: 100%;
-  border: 1px solid black;
+  float: left;
+  min-width:49%;
+  height: 20px;
 }
 
-#order-toggle div {
-  display: inline-block;
-  max-width: 20%;
-  vertical-align: middle;
+.price-column-cell {
   border: 1px solid black;
-  overflow: hidden;
-  white-space: nowrap;
+  margin: 0 auto;
+  text-align: center;
+  float: right;
+  min-width:49%;
+  height: 20px;
 }
+
 
 .recall-order {
 
+/*styling here*/
+
 }
 
-#tip-calculator {
-  width: 20%;
-  border: 1px solid black;
-  float: right;
-}
+
 
 .ordered-item {
   text-align: left;

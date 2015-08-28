@@ -3,10 +3,10 @@
   //necessary variables
   var new_order = [];
   var current_orders = [];
+  var subtotal = 0;
 
   var new_order_button = $("#new-order-button"); //begins new order
   var kitchen_fire_button = $("#fire-button"); //adds to  bill`
-  var edit_order_button = $("#edit-order-button");
   var print_button = $("#print-button")
 
   var menu_library = []; //stores menu
@@ -40,10 +40,10 @@
   ];
 
   dessert_array = [ "Dessert",
-    {item: "Apple Cider Caramel Dessert Pizza", price: 12},
+    {item: "Apple Cider Caramel Pizza", price: 12},
     {item: "Vegan Pistachio Ice Cream", price:6 },
     {item: "Hot Honey Sunday", price: 8},
-    {item: "Candied Orange Dessert Pizza", price:13}
+    {item: "Candied Orange Pizza", price:13}
   ];
 
   drinks_array = [ "Drinks",
@@ -74,9 +74,13 @@
       section_header = "<ul class=food-category>"+element[0]+"</ul>"
       menu_header.append(section_header)
 
+        //build array table
         for(j = 1; j < element.length; j++) {
-          menu_item = "<li> <div class=menu-item>"+element[j].item+"</div>"+element[j].price+"</li>";
-          $(".food-category").last().append(menu_item)
+          menu_item   = '<div class="menu-item item-column-cell">'+element[j].item+'</div>'  //
+          menu_price  = '<div class="price-column-cell">'+element[j].price  +'</div>' //price div
+          menu_row    = '<div><div class="row">'+menu_item+menu_price+'</div></div>'     //entire row
+
+          $(".food-category").last().append(menu_row)
         }
     })
   }
@@ -98,7 +102,8 @@
   //currently, can only fire once before needing reload. this is fine for now.
   function begin_new_order() {
     new_order_button.on('click', function() {
-      new_order_button.hide();
+      new_order_button.attr("disabled");
+      new_order_button.text("Button Disabled");
       this_order = new_order;
 
       $("#current-order").append("<ul id='customer-order'></ul>")
@@ -110,22 +115,24 @@
   //moves menu items to customer order
   function add_menu_item() {
     $(".menu-item").on('click', function(element) {
-      ordered_item = $("<li class=ordered-item></li>")
+      ordered_item = $('<div class="ordered-item item-column-cell"></div>')
+
       ordered_item.text($(element.target).text())
+
       $("#customer-order").append(ordered_item)
     })
   }
 
 
   // Stores an order, holy god
- $("#fire-button").on('click', function(event) {
+ $(kitchen_fire_button).on('click', function(event) {
      current_orders.push([]);
      last_index = current_orders.length - 1
      set_retrieval_data(last_index, "Nick")
      current_orders[last_index].push(retrieval_object)
 
      //iterates through the food library to find all available stuff
-     $("li.ordered-item").each(function() {
+     $("div.ordered-item").each(function() {
        menu_library.forEach(function(element) {
          element.forEach(function(food) {
            ordered_food_item = $(".ordered-item").last();
@@ -138,47 +145,63 @@
 
     });
 
-    new_order_button.show();
+    new_order_button.removeAttr("disabled");
+    new_order_button.text("Begin New Order");
 
     //adds recall ability
     $("#last-fired").removeAttr("id", "#last-fired")
-    $("#order-toggle").append("<div class=recall-order id='last-fired'> Order #"+current_orders[last_index][0]['id']+" </div")
-
+    $("#order-toggle").append("<div class=recall-order id='last-fired'> Order #"+(current_orders[last_index][0]['id']+1)+" </div")
 
     $(".recall-order").on("click", function(element) {
+      subtotal = 0
       console.log('fired');
 
       index = $(element.target).index();
 
-      //COULD BE A FILTER
-       for (i = 1; i<current_orders[index].length; i++) {
-            ordered_item = $("<li class=ordered-item></li>");
-            ordered_item.text(current_orders[index][i].item);
-            $("#bill-list").append(ordered_item);
+      //COULD BE A FILTER.
+      //recalc on recall
+
+      for (i = 1; i<current_orders[index].length; i++) {
+
+            bill_item   = '<div class="ordered-item item-column-cell">'+current_orders[index][i].item+'</div>'  //
+            bill_price  = '<div class="price-column-cell bill-price">'+current_orders[index][i].price  +'</div>' //price div
+            bill_row    = '<div><div class="row">'+bill_item+bill_price+'</div></div>'     //entire row
+                        //price
+            price_count = current_orders[index][i].price;
+            subtotal += price_count;
+            console.log(price_count);
+
+            $("#bill-list").append(bill_row);
        }
+      $(element.target).remove(); //yaaaaas okay it works, and solves the error. the ideal situation is "table #" so index position matters 0%
+      $("#subtotal-value").val(subtotal)
 
-       //$(element.target).remove(); //yaaaaas okay it works, and solves the error. the ideal situation is "table #" so index position matters 0%
+      $("#total-bill").val(summer(subtotal))
+      return subtotal;
 
-       //basic console calculator event handler
+     })
+     return subtotal;
+   });
+
+   function summer(int) {
+     tip = $("#tip-percent").val();
+     tax = $("#tax-total").val();
+     total = ((int * tip) + (int * tax) + int);
+
+     return total;
+   }
 
 
-      for (i = 1; i < current_orders[index].length; i++) {
-          price_count = current_orders[index][i].price
-          console.log(price_count)
-
-
-
-          // if (current_orders[order][food].indexOf(food) > 0) {
-          //   console.log(current_orders[order][food]['item'])
-          // }
-        }})
-      });
 
   $("#edit-order-button").on("click", function(element){
     //remove recall-order from div
-    last_index = $(".recall-order").index()
+    subtotal = 0
+    $("#subtotal-value").val(subtotal);
+    $("#total-bill").val(summer(subtotal))
+    last_index = $(".recall-order").index();
     $("#last-fired").removeAttr("id", "last-fired")
     $("#customer-order").append($(".ordered-item"))
+    $('#bill-list').children().remove()
   })
 
   menu_builder();

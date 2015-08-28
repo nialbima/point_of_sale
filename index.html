@@ -9,12 +9,15 @@
 <body>
 
     <div id="header-container">
-      <h1 id="header">
-        <div> PIZZA RULES </div>
+      <h1 id="page-header">
+        <div> PIZZA RULES</div>
       </h1>
 
-      <div id="tip-calculator">
-        <div>Today's Tips</div>
+      <div id="calculator-container">
+        <div>Subtotal: <input id="subtotal-value"></input></div>
+        <div>Tax: <input id="tax-total" value=".08875"></input></div>
+        <div>Tip: <select id="tip-percent"> <option value=.25>25%</option><option value=.20>20%</option><option value=.15>15%</option></select></div>
+        <div>Total: <input id="total-bill" disabled></input></div>
       </div>
 
       <div id="order-toggle">Open Orders: </div>
@@ -25,26 +28,32 @@
 
   <div id="body-container">
 
-      <div id="menu-container">
+      <div class="row" id="menu-container">
         <button id="new-order-button" class="button"/>Begin New Order</button>
         <h2 class="container-label"> Menu</h2>
       </div>
 
-      <div id="order-container">
+      <div class="row" id="order-container">
           <div ><button class="button" id="fire-button">Fire Order</button></div>
 
           <h2 id="current-order" class="container-label">Current Order</h2>
 
       </div>
 
-      <div id="price-container">
+      <div class="row" id="price-container">
         <div ><button class="button" id="edit-order-button">Edit Order</button></div>
-        <h2 id="bill-list" class="container-label">Bill Total</h2>
+        <h2 class="container-label">Bill Total</h2>
+        <div id="bill-list"></div>
         <!-- mirrors center div, but includes price and calculates total -->
         <!-- lets you print your bill -->
       </div>
 
   </div>
+
+  <!--
+    use this object structure to build your table rows
+    '<div><div class="row"><div class="item-column-cell">'food.item'</div><div class="price-column-cell">'+element.symbol+'</div></div></div>''
+  -->
 
 </body>
 
