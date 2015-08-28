@@ -90,10 +90,15 @@
     return retrieval_object
   }
 
+  //switch server on click event tied to "switch server button"
+  //use a a filter/map function to pull only the orders that are present
+  //therefore would need another array
+  //alternately, store all those values in ind. server arrays
+
   //currently, can only fire once before needing reload. this is fine for now.
   function begin_new_order() {
     new_order_button.on('click', function() {
-      new_order_button.remove();
+      new_order_button.hide();
       this_order = new_order;
 
       $("#current-order").append("<ul id='customer-order'></ul>")
@@ -102,6 +107,7 @@
     })
   }
 
+  //moves menu items to customer order
   function add_menu_item() {
     $(".menu-item").on('click', function(element) {
       ordered_item = $("<li class=ordered-item></li>")
@@ -111,13 +117,14 @@
   }
 
 
-  // Stores an order
-   $("#fire-button").on('click', function(event) {
+  // Stores an order, holy god
+ $("#fire-button").on('click', function(event) {
      current_orders.push([]);
      last_index = current_orders.length - 1
      set_retrieval_data(last_index, "Nick")
      current_orders[last_index].push(retrieval_object)
 
+     //iterates through the food library to find all available stuff
      $("li.ordered-item").each(function() {
        menu_library.forEach(function(element) {
          element.forEach(function(food) {
@@ -126,41 +133,55 @@
            if (ordered_food_item.text() === food.item) {
             current_orders[last_index].push(food);
             ordered_food_item.remove();
-
         }});
       });
+
     });
 
+    new_order_button.show();
+
     //adds recall ability
-    $("#order-toggle").append("<div class=recall-order> Order #"+current_orders[last_index][0]['id']+" </div")
+    $("#last-fired").removeAttr("id", "#last-fired")
+    $("#order-toggle").append("<div class=recall-order id='last-fired'> Order #"+current_orders[last_index][0]['id']+" </div")
+
+
     $(".recall-order").on("click", function(element) {
-      $(".ordered-item").remove();
       console.log('fired');
 
       index = $(element.target).index();
 
       //COULD BE A FILTER
        for (i = 1; i<current_orders[index].length; i++) {
-            
             ordered_item = $("<li class=ordered-item></li>");
             ordered_item.text(current_orders[index][i].item);
-            $("#customer-order").append(ordered_item);
+            $("#bill-list").append(ordered_item);
        }
 
+       //$(element.target).remove(); //yaaaaas okay it works, and solves the error. the ideal situation is "table #" so index position matters 0%
+
+       //basic console calculator event handler
 
 
-    });
-  });
+      for (i = 1; i < current_orders[index].length; i++) {
+          price_count = current_orders[index][i].price
+          console.log(price_count)
 
-  //retrieve order
 
 
-  function order_handlers() {
-      begin_new_order();
-      add_menu_item();
-  }
+          // if (current_orders[order][food].indexOf(food) > 0) {
+          //   console.log(current_orders[order][food]['item'])
+          // }
+        }})
+      });
+
+  $("#edit-order-button").on("click", function(element){
+    //remove recall-order from div
+    last_index = $(".recall-order").index()
+    $("#last-fired").removeAttr("id", "last-fired")
+    $("#customer-order").append($(".ordered-item"))
+  })
 
   menu_builder();
-  order_handlers();
-
+  begin_new_order();
+  add_menu_item();
 // });

@@ -2,7 +2,7 @@
   width: 100%;
   border: 1px solid black;
   margin: 0 auto;
-  height: 5000px;
+  height: 1500px;
   background-color: white;
   padding: 20px 0 0 0;
   font-size: 18px;
@@ -38,7 +38,7 @@
   color: white;
 }
 
-#bill-container {
+#price-container {
   float:left;
   margin: 0 auto;
   width: 33%;
@@ -63,7 +63,9 @@
   white-space: nowrap;
 }
 
-.recall-order {}
+.recall-order {
+
+}
 
 #tip-calculator {
   width: 20%;
@@ -72,6 +74,11 @@
 }
 
 .ordered-item {
+  text-align: left;
+  font-size: 18px;
+}
+
+.ordered-item-price {
   text-align: left;
   font-size: 18px;
 }
