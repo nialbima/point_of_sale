@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="style_sheets/styles.css"></link>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Domine:400,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -13,12 +14,21 @@
         <div> PIZZA RULES</div>
       </h1>
 
-      <div id="calculator-container">
-        <div>Subtotal: <input id="subtotal-value"></input></div>
-        <div>Tax: <input id="tax-total" value=".08875"></input></div>
-        <div>Tip: <select id="tip-percent"> <option value=.25>25%</option><option value=.20>20%</option><option value=.15>15%</option></select></div>
-        <div>Total: <input id="total-bill" disabled></input></div>
-      </div>
+      <table id="calculator-container">
+        <tr>
+          <td> Subtotal: </td> <td><input id="subtotal-value"></input></td>
+        </tr>
+        <tr>
+          <td>Tax:</td><td><input id="tax-total" value=".08875"></input></td>
+        </tr>
+        <tr>
+          <td>Tip:</td><td><select id="tip-percent"><<option value=.25>25%</option><option value=.20>20%</option><option value=.15>15%</option></select></td>
+        </tr>
+        <tr>
+          <td>Total: </td><td><input id="total-bill" disabled></input></td>
+        </tr>
+      </table>
+
 
       <div id="order-toggle">Open Orders: </div>
       <!-- <select name="select-servers"></select>
