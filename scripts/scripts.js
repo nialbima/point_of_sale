@@ -115,9 +115,14 @@
   //moves menu items to customer order
   function add_menu_item() {
     $(".menu-item").on('click', function(element) {
-      ordered_item = $('<div class="ordered-item item-column-cell"></div>')
+      //if-else: if item. val is a child in the menu-column, up that value by one. else, add item
 
+      ordered_item = $('<div class="ordered-item item-column-cell"></div>')
       ordered_item.text($(element.target).text())
+
+      //add quant column
+      quant_column = $('<div class="quant-column-cell"><input class="quant-column-input" value=1 type=number width=5px></div>')
+      ordered_item.append(quant_column)
 
       $("#customer-order").append(ordered_item)
     })
@@ -176,7 +181,7 @@
       $(element.target).remove(); //yaaaaas okay it works, and solves the error. the ideal situation is "table #" so index position matters 0%
       $("#subtotal-value").val(subtotal)
 
-      $("#total-bill").val(summer(subtotal))
+  $("#total-bill").val(summer(subtotal))
       return subtotal;
 
      })
@@ -186,10 +191,16 @@
    function summer(int) {
      tip = $("#tip-percent").val();
      tax = $("#tax-total").val();
-     total = ((int * tip) + (int * tax) + int);
+     total = Math.round((((int * tip) + (int * tax) + int) * 100))/100;
 
      return total;
    }
+
+  $("#tip-percent").on("change", function(element){
+    $("#total-bill").val(summer(subtotal));
+    console.log("tip changed")
+  })
+
 
   $("#edit-order-button").on("click", function(element){
     //remove recall-order from div
@@ -203,11 +214,14 @@
   })
 
 //add neat colors
-// 
-// $(".button").on("click", function(element){
-//   $(element.target).attr("background-color", "red");
-// })
 
+$(".button").on("click", function(element){
+  $(element.target).css("background-color", "red");
+})
+
+$(".button").on("click", function(element){
+setTimeout($(element.target).css("background-color", "white"), 50)
+})
 
   menu_builder();
   begin_new_order();
