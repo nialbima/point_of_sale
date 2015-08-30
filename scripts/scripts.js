@@ -203,10 +203,10 @@
   })
 
 //add neat colors
-
-$(".button").on("click", function(element){
-  $(element.target).attr("background-color", "red");
-})
+// 
+// $(".button").on("click", function(element){
+//   $(element.target).attr("background-color", "red");
+// })
 
 
   menu_builder();
