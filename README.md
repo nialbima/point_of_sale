@@ -9,3 +9,17 @@ To-do (in order of priority):
 -add the comping functionality
 -add vegetarian flag
 -add a button for "PRINT BILL" that returns an alert on "BILL PAID" for "how'd they pay " (if cash) "how much" (calc. change  )
+
+
+Design stuff:
+-centering: center header
+-make cleaner div for order #s
+  -border
+-assign some animations
+-add some extra color
+
+use setTimeout to change .attrs on event fire
+
+add quant field to main div
+
+use "quant 0" to delete the order
