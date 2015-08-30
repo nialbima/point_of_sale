@@ -191,8 +191,6 @@
      return total;
    }
 
-
-
   $("#edit-order-button").on("click", function(element){
     //remove recall-order from div
     subtotal = 0
@@ -203,6 +201,13 @@
     $("#customer-order").append($(".ordered-item"))
     $('#bill-list').children().remove()
   })
+
+//add neat colors
+
+$(".button").on("click", function(element){
+  $(element.target).attr("background-color", "red");
+})
+
 
   menu_builder();
   begin_new_order();

@@ -4,7 +4,7 @@
   width: 100%;
   /*border: 1px solid black;*/
   margin: 0 auto;
-  height: 100%;
+  min-height: 500px;
   background-color: white;
   padding: 20px 0 0 0;
   font-size: 18px;
@@ -100,8 +100,9 @@
   border:1px solid black;
   text-align: left;
   float: left;
-  min-width:49%;
+  min-width:79%;
   height: 20px;
+
   font-family: "Domine" serif;
 }
 
@@ -115,11 +116,12 @@ h2 {
   margin: 0 auto;
   text-align: center;
   float: right;
-  min-width:49%;
+  width:20%;
   height: 20px;
 }
 
 .food-category {
+  margin-top: 10px;
   font-family: "Montserrat" sans-serif;
 }
 
